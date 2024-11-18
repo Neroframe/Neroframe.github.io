@@ -1,0 +1,16 @@
+{{ define "title" }}{{ .Title }}{{ end }}
+{{ define "content" }}
+    <h1>{{ .Title }}</h1>
+    <form method="POST">
+        {{ if ne .Title "Create Disease Type" }}
+        <p><strong>ID:</strong> {{ .DiseaseType.ID }}</p>
+        {{ end }}
+        <div class="mb-3">
+            <label for="description" class="form-label">Description</label>
+            <input type="text" id="description" name="description" class="form-control" value="{{ .DiseaseType.Description }}" required>
+        </div>
+        <button type="submit" class="btn btn-success">Submit</button>
+        <a href="/disease_types" class="btn btn-secondary">Cancel</a>
+    </form>
+{{ end }}
+{{ template "base.html" . }}

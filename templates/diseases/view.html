@@ -1,0 +1,15 @@
+{{ define "title" }}View Disease{{ end }}
+{{ define "content" }}
+    <h1>{{ .Title }}</h1>
+    <div class="mb-3">
+        <p><strong>Disease Code:</strong> {{ .Disease.DiseaseCode }}</p>
+        <p><strong>Pathogen:</strong> {{ .Disease.Pathogen }}</p>
+        <p><strong>Description:</strong> {{ .Disease.Description }}</p>
+        <p><strong>Disease Type ID:</strong> {{ .Disease.ID }}</p>
+    </div>
+    <a href="/diseases/edit?disease_code={{ .Disease.DiseaseCode }}" class="btn btn-warning">Edit</a>
+    <a href="/diseases/delete?disease_code={{ .Disease.DiseaseCode }}" class="btn btn-danger"
+        onclick="return confirm('Are you sure you want to delete this disease?');">Delete</a>
+    <a href="/diseases" class="btn btn-secondary">Back to Diseases</a>
+{{ end }}
+{{ template "base.html" . }}

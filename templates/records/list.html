@@ -1,0 +1,32 @@
+{{ define "title" }}Records{{ end }}
+{{ define "content" }}
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h1>Records</h1>
+        <a href="/records/create" class="btn btn-primary">Add New Record</a>
+    </div>
+    <table class="table table-striped table-bordered">
+        <thead class="table-dark">
+            <tr>
+                <th>Email</th>
+                <th>Country Name</th>
+                <th>Disease Code</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{ range .Records }}
+            <tr>
+                <td>{{ .Email }}</td>
+                <td>{{ .CName }}</td>
+                <td>{{ .DiseaseCode }}</td>
+                <td>
+                    <a href="/records/view?email={{ .Email }}&cname={{ .CName }}&disease_code={{ .DiseaseCode }}" class="btn btn-sm btn-info">View</a>
+                    <a href="/records/delete?email={{ .Email }}&cname={{ .CName }}&disease_code={{ .DiseaseCode }}" class="btn btn-sm btn-danger"
+                        onclick="return confirm('Are you sure you want to delete this record?');">Delete</a>
+                </td>
+            </tr>
+            {{ end }}
+        </tbody>
+    </table>
+{{ end }}
+{{ template "base.html" . }}

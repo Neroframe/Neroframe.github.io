@@ -1,0 +1,21 @@
+{{ define "title" }}{{ .Title }}{{ end }}
+{{ define "content" }}
+    <h1>{{ .Title }}</h1>
+    <form method="POST">
+        {{ if eq .Title "Create Doctor" }}
+        <div class="mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input type="email" id="email" name="email" class="form-control" required>
+        </div>
+        {{ else }}
+        <p><strong>Email:</strong> {{ .Doctor.Email }}</p>
+        {{ end }}
+        <div class="mb-3">
+            <label for="degree" class="form-label">Degree</label>
+            <input type="text" id="degree" name="degree" class="form-control" value="{{ .Doctor.Degree }}" required>
+        </div>
+        <button type="submit" class="btn btn-success">Submit</button>
+        <a href="/doctors" class="btn btn-secondary">Cancel</a>
+    </form>
+{{ end }}
+{{ template "base.html" . }}

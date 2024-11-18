@@ -1,0 +1,25 @@
+{{ define "title" }}{{ .Title }}{{ end }}
+{{ define "content" }}
+    <h1>{{ .Title }}</h1>
+    <form method="POST">
+        <div class="mb-3">
+            <label for="id" class="form-label">Disease Type</label>
+            <select id="id" name="id" class="form-control" required>
+                {{ range .DiseaseTypes }}
+                <option value="{{ .ID }}" {{ if eq .ID $.Specialize.ID }}selected{{ end }}>{{ .Description }}</option>
+                {{ end }}
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="email" class="form-label">Doctor Email</label>
+            <select id="email" name="email" class="form-control" required>
+                {{ range .Doctors }}
+                <option value="{{ .Email }}" {{ if eq .Email $.Specialize.Email }}selected{{ end }}>{{ .Email }}</option>
+                {{ end }}
+            </select>
+        </div>
+        <button type="submit" class="btn btn-success">Submit</button>
+        <a href="/specializes" class="btn btn-secondary">Cancel</a>
+    </form>
+{{ end }}
+{{ template "base.html" . }}

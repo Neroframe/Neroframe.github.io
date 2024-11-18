@@ -1,0 +1,30 @@
+{{ define "title" }}Patient Diseases{{ end }}
+{{ define "content" }}
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h1>Patient Diseases</h1>
+    <a href="/patient_diseases/create" class="btn btn-primary">Add New Patient Disease</a>
+</div>
+<table class="table table-striped table-bordered">
+    <thead class="table-dark">
+        <tr>
+            <th>Email</th>
+            <th>Disease Code</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {{ range .PatientDiseases }}
+        <tr>
+            <td>{{ .Email }}</td>
+            <td>{{ .DiseaseCode }}</td>
+            <td>
+                <a href="/patient_diseases/view?email={{ .Email }}&disease_code={{ .DiseaseCode }}" class="btn btn-sm btn-info">View</a>
+                <a href="/patient_diseases/delete?email={{ .Email }}&disease_code={{ .DiseaseCode }}" class="btn btn-sm btn-danger"
+                    onclick="return confirm('Are you sure you want to delete this patient disease?');">Delete</a>
+            </td>
+        </tr>
+        {{ end }}
+    </tbody>
+</table>
+{{ end }}
+{{ template "base.html" . }}

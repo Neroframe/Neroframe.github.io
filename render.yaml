@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: go-web-app
+    env: docker
+    plan: free
+    buildCommand: go build -o main .
+    startCommand: ./main
+    region: oregon
+    envVars:
+      - key: DATABASE_URL
+        sync: false

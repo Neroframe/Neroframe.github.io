@@ -1,0 +1,21 @@
+{{ define "title" }}{{ .Title }}{{ end }}
+{{ define "content" }}
+    <h1>{{ .Title }}</h1>
+    <form method="POST">
+        <div class="mb-3">
+            {{ if eq .Title "Create Country" }}
+            <label for="cname" class="form-label">Country Name</label>
+            <input type="text" id="cname" name="cname" class="form-control" required>
+            {{ else }}
+            <p><strong>Country Name:</strong> {{ .Country.CName }}</p>
+            {{ end }}
+        </div>
+        <div class="mb-3">
+            <label for="population" class="form-label">Population</label>
+            <input type="number" id="population" name="population" class="form-control" value="{{ .Country.Population }}" required>
+        </div>
+        <button type="submit" class="btn btn-success">Submit</button>
+        <a href="/countries" class="btn btn-secondary">Cancel</a>
+    </form>
+{{ end }}
+{{ template "base.html" . }}

@@ -1,0 +1,21 @@
+{{ define "title" }}{{ .Title }}{{ end }}
+{{ define "content" }}
+    <h1>{{ .Title }}</h1>
+    <form method="POST">
+        {{ if eq .Title "Create Public Servant" }}
+        <div class="mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input type="email" id="email" name="email" class="form-control" required>
+        </div>
+        {{ else }}
+        <p><strong>Email:</strong> {{ .PublicServant.Email }}</p>
+        {{ end }}
+        <div class="mb-3">
+            <label for="department" class="form-label">Department</label>
+            <input type="text" id="department" name="department" class="form-control" value="{{ .PublicServant.Department }}" required>
+        </div>
+        <button type="submit" class="btn btn-success">Submit</button>
+        <a href="/public_servants" class="btn btn-secondary">Cancel</a>
+    </form>
+{{ end }}
+{{ template "base.html" . }}

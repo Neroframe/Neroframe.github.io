@@ -1,0 +1,13 @@
+{{ define "title" }}{{ .Title }}{{ end }}
+{{ define "content" }}
+<h1>{{ .Title }}</h1>
+<form method="POST">
+    <div class="mb-3">
+        <label for="email" class="form-label">Email</label>
+        <input type="email" id="email" name="email" class="form-control" value="{{ .Patient.Email }}" required {{ if eq .Title "Edit Patient" }}readonly{{ end }}>
+    </div>
+    <button type="submit" class="btn btn-success">Submit</button>
+    <a href="/patients" class="btn btn-secondary">Cancel</a>
+</form>
+{{ end }}
+{{ template "base.html" . }}

@@ -1,0 +1,34 @@
+{{ define "title" }}{{ .Title }}{{ end }}
+{{ define "content" }}
+    <h1>{{ .Title }}</h1>
+    <form method="POST">
+        {{ if eq .Title "Create Discovery" }}
+        <div class="mb-3">
+            <label for="cname" class="form-label">Country Name</label>
+            <select id="cname" name="cname" class="form-control" required>
+                {{ range .Countries }}
+                <option value="{{ .CName }}">{{ .CName }}</option>
+                {{ end }}
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="disease_code" class="form-label">Disease Code</label>
+            <select id="disease_code" name="disease_code" class="form-control" required>
+                {{ range .Diseases }}
+                <option value="{{ .DiseaseCode }}">{{ .DiseaseCode }}</option>
+                {{ end }}
+            </select>
+        </div>
+        {{ else }}
+        <p><strong>Country Name:</strong> {{ .Discover.CName }}</p>
+        <p><strong>Disease Code:</strong> {{ .Discover.DiseaseCode }}</p>
+        {{ end }}
+        <div class="mb-3">
+            <label for="first_enc_date" class="form-label">First Encounter Date</label>
+            <input type="date" id="first_enc_date" name="first_enc_date" class="form-control" value="{{ .Discover.FirstEncDate.Format "2006-01-02" }}" required>
+        </div>
+        <button type="submit" class="btn btn-success">Submit</button>
+        <a href="/discovers" class="btn btn-secondary">Cancel</a>
+    </form>
+{{ end }}
+{{ template "base.html" . }}

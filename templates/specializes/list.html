@@ -1,0 +1,31 @@
+{{ define "title" }}Specializations{{ end }}
+{{ define "content" }}
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h1>Specializations</h1>
+        <a href="/specializes/create" class="btn btn-primary">Add New Specialization</a>
+    </div>
+    <table class="table table-striped table-bordered">
+        <thead class="table-dark">
+            <tr>
+                <th>Disease Type ID</th>
+                <th>Doctor Email</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{ range .Specializes }}
+            <tr>
+                <td>{{ .ID }}</td>
+                <td>{{ .Email }}</td>
+                <td>
+                    <a href="/specializes/view?id={{ .ID }}&email={{ .Email }}" class="btn btn-sm btn-info">View</a>
+                    <a href="/specializes/edit?id={{ .ID }}&email={{ .Email }}" class="btn btn-sm btn-warning">Edit</a>
+                    <a href="/specializes/delete?id={{ .ID }}&email={{ .Email }}" class="btn btn-sm btn-danger"
+                        onclick="return confirm('Are you sure you want to delete this specialization?');">Delete</a>
+                </td>
+            </tr>
+            {{ end }}
+        </tbody>
+    </table>
+{{ end }}
+{{ template "base.html" . }}

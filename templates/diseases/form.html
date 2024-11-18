@@ -1,0 +1,33 @@
+{{ define "title" }}{{ .Title }}{{ end }}
+{{ define "content" }}
+    <h1>{{ .Title }}</h1>
+    <form method="POST">
+        <div class="mb-3">
+            {{ if eq .Title "Create Disease" }}
+            <label for="disease_code" class="form-label">Disease Code</label>
+            <input type="text" id="disease_code" name="disease_code" class="form-control" required>
+            {{ else }}
+            <p><strong>Disease Code:</strong> {{ .Disease.DiseaseCode }}</p>
+            {{ end }}
+        </div>
+        <div class="mb-3">
+            <label for="pathogen" class="form-label">Pathogen</label>
+            <input type="text" id="pathogen" name="pathogen" class="form-control" value="{{ .Disease.Pathogen }}" required>
+        </div>
+        <div class="mb-3">
+            <label for="description" class="form-label">Description</label>
+            <input type="text" id="description" name="description" class="form-control" value="{{ .Disease.Description }}" required>
+        </div>
+        <div class="mb-3">
+            <label for="id" class="form-label">Disease Type</label>
+            <select id="id" name="id" class="form-control" required>
+                {{ range .DiseaseTypes }}
+                <option value="{{ .ID }}" {{ if eq .ID $.Disease.ID }}selected{{ end }}>{{ .Description }}</option>
+                {{ end }}
+            </select>
+        </div>
+        <button type="submit" class="btn btn-success">Submit</button>
+        <a href="/diseases" class="btn btn-secondary">Cancel</a>
+    </form>
+{{ end }}
+{{ template "base.html" . }}

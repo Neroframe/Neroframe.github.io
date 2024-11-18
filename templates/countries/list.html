@@ -1,0 +1,31 @@
+{{ define "title" }}Countries{{ end }}
+{{ define "content" }}
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h1>Countries</h1>
+        <a href="/countries/create" class="btn btn-primary">Add New Country</a>
+    </div>
+    <table class="table table-striped table-bordered">
+        <thead class="table-dark">
+            <tr>
+                <th>Country Name</th>
+                <th>Population</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{ range .Countries }}
+            <tr>
+                <td>{{ .CName }}</td>
+                <td>{{ .Population }}</td>
+                <td>
+                    <a href="/countries/view?cname={{ .CName }}" class="btn btn-sm btn-info">View</a>
+                    <a href="/countries/edit?cname={{ .CName }}" class="btn btn-sm btn-warning">Edit</a>
+                    <a href="/countries/delete?cname={{ .CName }}" class="btn btn-sm btn-danger"
+                        onclick="return confirm('Are you sure you want to delete this country?');">Delete</a>
+                </td>
+            </tr>
+            {{ end }}
+        </tbody>
+    </table>
+{{ end }}
+{{ template "base.html" . }}

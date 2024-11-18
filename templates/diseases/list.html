@@ -1,0 +1,45 @@
+{{ define "title" }}Diseases{{ end }} {{ define "content" }}
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <h1>Diseases</h1>
+  <a href="/diseases/create" class="btn btn-primary">Add New Disease</a>
+</div>
+<table class="table table-striped table-bordered">
+  <thead class="table-dark">
+    <tr>
+      <th>Disease Code</th>
+      <th>Pathogen</th>
+      <th>Description</th>
+      <th>Disease Type ID</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{ range .Diseases }}
+    <tr>
+      <td>{{ .DiseaseCode }}</td>
+      <td>{{ .Pathogen }}</td>
+      <td>{{ .Description }}</td>
+      <td>{{ .ID }}</td>
+      <td>
+        <a
+          href="/diseases/view?disease_code={{ .DiseaseCode }}"
+          class="btn btn-sm btn-info"
+          >View</a
+        >
+        <a
+          href="/diseases/edit?disease_code={{ .DiseaseCode }}"
+          class="btn btn-sm btn-warning"
+          >Edit</a
+        >
+        <a
+          href="/diseases/delete?disease_code={{ .DiseaseCode }}"
+          class="btn btn-sm btn-danger"
+          onclick="return confirm('Are you sure you want to delete this disease?');"
+          >Delete</a
+        >
+      </td>
+    </tr>
+    {{ end }}
+  </tbody>
+</table>
+{{ end }} {{ template "base.html" . }}
